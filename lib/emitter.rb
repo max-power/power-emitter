@@ -19,8 +19,8 @@ class Emitter
   
   module Emittable
     require "forwardable"
-    
     extend Forwardable
+    
     def_delegators :emitter, :bind, :emit, :stop
     
     private
@@ -33,7 +33,7 @@ class Emitter
   module Aliases
     BIND = %i[ on subscribe listen observe handle ].freeze
     EMIT = %i[ fire publish broadcast notify trigger ].freeze
-    STOP = %i[ off unsubscribe drop ignore ].freeze
+    STOP = %i[ off unsubscribe drop ignore release ].freeze
     
     def self.included(base)
       BIND.each { base.alias_method it, :bind }
