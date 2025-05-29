@@ -5,8 +5,8 @@ Gem::Specification.new do |s|
   s.version  = "0.0.1"
   s.authors  = ["Max Power"]
   s.email    = ["kevin.melchert@gmail.com"]
-  s.summary  = "TODO: Write a short summary, because RubyGems requires one."
-  s.homepage = "TODO: Put your gem's website or public repo URL here."
+  s.summary  = "A lightweight Ruby event emitter that allows you to bind, emit, and stop custom events using blocks."
+  s.homepage = "https://github.com/max-power/power-emitter/"
   s.license  = "MIT"
   
   s.required_ruby_version = ">= 3.4.0"
