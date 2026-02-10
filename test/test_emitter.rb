@@ -5,7 +5,7 @@ require "tldr/autorun"
 
 class TestEmitter < TLDR
   def setup
-    @emitter = Emitter.new
+    @emitter = Emittable::Emitter.new
   end
 
   def test_bind_and_emit
@@ -16,6 +16,14 @@ class TestEmitter < TLDR
   end
 
   def test_multiple_bindings
+    results = []
+    @emitter.bind(:ping) { results << "one" }
+    @emitter.bind(:ping) { results << "two" }
+    @emitter.emit(:ping)
+    assert_equal ["one", "two"], results
+  end
+
+  def test_multiple_bindings_unique
     results = []
     @emitter.bind(:ping) { results << "one" }
     @emitter.bind(:ping) { results << "two" }

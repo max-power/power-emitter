@@ -24,7 +24,7 @@ Calls all callbacks for the given event, passing in arguments.
 
 ## Usage
 ```ruby
-emitter = Emitter.new
+emitter = Emittable::Emitter.new
 
 # Bind a listener
 emitter.bind(:greet) { |name| puts "Hello, #{name}!" }
@@ -40,12 +40,12 @@ emitter.stop
 ```
 
 
-## Example with Emitter::Emittable
+## Example with Emittable
 
 ```ruby
 class Chat
-  include Emitter::Emittable
-  #include Emitter::Aliases
+  include Emittable
+  #include Emittable::Aliases
 
   def initialize
     @messages = []
@@ -67,7 +67,7 @@ chat.bind(:new_message) { |msg| puts "New Message: #{msg}" }
 chat.bind(:clear_messages) { |msgs| puts "#{msgs.count} Messages deleted!" }
 ```
 
-The Chat class includes Emitter::Emittable, a mixin that adds event-driven capabilities by creating a private emitter instance method. 
+The Chat class includes Emittable, a mixin that adds event-driven capabilities by creating a private emitter instance method.
 Internally, it uses Ruby’s Forwardable module to delegate bind, emit, and stop calls directly to the underlying Emitter instance.
 
 ## License
