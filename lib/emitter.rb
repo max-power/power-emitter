@@ -1,8 +1,9 @@
 # frozen_string_literal: true
-module Emittable
-  require "forwardable"
-  extend Forwardable
+require "forwardable"
+require "set"
 
+module Emittable
+  extend Forwardable
   def_delegators :emitter, :bind, :emit, :stop
 
   private
@@ -13,11 +14,12 @@ module Emittable
 
   class Emitter
     def initialize
-      @listeners = Hash.new { |h,k| h[k] = [] }
+      @listeners = Hash.new { |h,k| h[k] = Set.new }
     end
 
-    def bind(event, &block)
-      @listeners[event] << block
+    def bind(event, method_name = nil, &block)
+      callback = method_name ? method(method_name).to_proc : block
+      @listeners[event] << callback
     end
 
     def emit(event, *args)

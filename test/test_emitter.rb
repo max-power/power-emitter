@@ -23,13 +23,6 @@ class TestEmitter < TLDR
     assert_equal ["one", "two"], results
   end
 
-  def test_multiple_bindings_unique
-    results = []
-    @emitter.bind(:ping) { results << "one" }
-    @emitter.bind(:ping) { results << "two" }
-    @emitter.emit(:ping)
-    assert_equal ["one", "two"], results
-  end
 
   def test_emit_with_arguments
     results = []
